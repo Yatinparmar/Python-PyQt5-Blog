@@ -1,0 +1,196 @@
+ 
+
+PyQt5 : GUI design
+
+To create a GUI for your windows and dialogs in PyQt, you can take two main paths: you can use Qt Designer, or you can hand code the GUI in plain Python code. The first path can dramatically improve your productivity, whereas the second path puts you in full control of your application’s code.
+
+GUI applications often consist of a main window and several dialogs. If you’re looking to create these graphical components in an efficient and user-friendly way, then Qt Designer is the tool for you. In this tutorial, you’ll learn how to use Qt Designer to create your GUIs productively.
+Getting Started With Qt Designer
+Qt Designer is a Qt tool that provides you with a what-you-see-is-what-you-get (WYSIWYG) user interface to create GUIs for your PyQt applications productively and efficiently. With this tool, you create GUIs by dragging and dropping QWidget objects on an empty form. After that, you can arrange them into a coherent GUI using different layout managers.
+
+Qt Designer also allows you to preview your GUIs using different styles and resolutions, connect signals and slots, create menus and toolbars, and more.
+
+Qt Designer is platform and programming language independent. It doesn’t produce code in any particular programming language, but it creates .ui files. These files are XML files with detailed descriptions of how to generate Qt-based GUIs.
+
+Installing and Running Qt Designer
+There are several ways to get and install Qt Designer depending on your current platform. If you use Windows or Linux, then you can run the following commands from your terminal or command line:
+
+$ python3 -m venv ./venv
+$ source venv/bin/activate
+(venv) $ pip install pyqt5 pyqt5-tools
+Here, you create a Python virtual environment, activate it, and install pyqt5 and pyqt5-tools. pyqt5 installs PyQt and a copy of the required Qt libraries, while pyqt5-tools installs a set of Qt tools that includes Qt Designer.
+
+The installation will place the Qt Designer executable in a different directory according to your platform:
+
+Linux: ...lib/python3.x/site-packages/qt5_applications/Qt/bin/designer
+Windows: ...Lib\site-packages\pyqt5_tools\designer.exe
+On Linux systems, such as Debian and Ubuntu, you can also install Qt Designer by using the system package manager with the following command:
+
+$ sudo apt install qttools5-dev-tools
+This command downloads and installs Qt Designer and other Qt tools on your system. In other words, you’ll have a system-wide installation and you’ll be able to run Qt Designer by clicking its icon in a file manager or system menu.
+
+On macOS, if you’ve installed Qt from Homebrew using the brew install qt command, then you should have Qt Designer already installed on your system.
+
+Finally, you can download the Qt installer for your current platform from the official download site and then follow the on-screen instructions. In this case, to complete the installation process, you need to register a Qt account.
+
+If you’ve already installed Qt Designer using one of the options discussed so far, then go ahead and launch the application. You should get the following two windows on your screen:
+
+Qt Designer GUI
+The window in the foreground is Qt Designer’s New Form dialog. The window in the background is Qt Designer’s main window.
+
+Using Qt Designer’s New Form Dialog
+When you run Qt Designer, you’re presented with the application’s main window and the New Form dialog. In this dialog, you can select from five available GUI templates. These templates include options to create dialogs, main windows, and custom widgets:
+
+Template	Form Type	Widgets	Base Class
+Dialog with Buttons Bottom	Dialog	OK and Cancel buttons laid out horizontally on the bottom-right corner	QDialog
+Dialog with Buttons Right	Dialog	OK and Cancel buttons laid out vertically on the top-right corner	QDialog
+Dialog without Buttons	Dialog	No	QDialog
+Main Window	Main Window	A menu bar at the top and a status bar at the bottom	QMainWindow
+Widget	Widget	No	QWidget
+By default, when you run Qt Designer, the New Form dialog appears in the foreground. If it doesn’t, then you can click New on Qt Designer’s toolbar. You can also click File → New in the main menu or press Ctrl+N on your keyboard.
+
+In the New Form dialog, you can select the form template that you want to start with and then click Create to generate a new form:
+
+Uploading: 163750 of 275159 bytes uploaded.
+Empty form using a Qt Designer template, you just need to select the desired template from the New Form dialog and then click Create or press Alt+R on you
+Working With Qt Designer’s Main Window
+Qt Designer’s main window provides a menu bar with options for saving and managing forms, editing forms and changing the edit mode, laying out and previewing forms, and also for tuning the application’s settings and accessing its help documentation:
+
+Qt Designer Main Menu
+The main window also provides a toolbar that displays commonly used options. You’ll use most of these options when you’re editing and laying out your forms. These options are also available in the main menu, especially in the File, Edit, and Form menus:
+
+Qt Designer Toolbar
+Qt Designer’s main window also includes a few dock windows that provide a rich set of features and tools:
+
+Widget Box
+Object Inspector
+Property Editor
+Resource Browser
+Action Editor
+Signal/Slot Editor
+Using Qt Designer vs Hand Coding Your GUIs
+With PyQt, you have at least two options for creating the GUI of a window or dialog: You can use Qt Designer, or you can hand code the GUI in plain Python code. Both options have their pros and cons. Sometimes it’s hard to decide when to use one or the other.
+
+Qt Designer provides a user-friendly graphical interface that allows you to quickly create GUIs. This can boost your productivity as a developer and shorten your development cycles.
+
+Hand coding your GUIs, on the other hand, can give you much more control over them. With this approach, adding new components and features doesn’t require any extra tools beyond your code editor or IDE, which can be quite convenient in some development environments.
+
+One last difference between using Qt Designer and hand coding a GUI is that you need to run an extra step when using Qt Designer: translating .ui files into Python code.
+
+Building Main Windows With Qt Designer and Python
+With PyQt, you can build main window–style and dialog-style applications. Main window–style applications often consist of a main window with a menu bar, one or more toolbars, a central widget, and a status bar. They can also include several dialogs, but those are independent of the main window.
+
+Qt Designer enables you to quickly build the GUI of your main windows using the predefined Main Window template. Once you’ve created a form based on that template, you’ll have tools to perform the following actions:
+
+Creating a main menu
+Adding and populating toolbars
+Laying out widgets
+Qt Designer’s Main Window template also provides a default central widget and a status bar at the bottom of the window:
+
+
+Qt Designer saves its forms in .ui files. These are XML files that contain all the information you’ll need to later recreate the GUI in your applications.
+
+To save your forms, go to File → Save, enter main_window.ui in the Save Form As dialog, select a directory to save the file in, and click Save. You can also get access to the Save Form As dialog by pressing Ctrl+S on your keyboard.
+
+Don’t close your Qt Designer session—stay there to continue adding menus and toolbars to the main window you just created.
+
+Creating the Main Menu
+Qt Designer’s Main Window template provides an empty menu bar at the top of the form. You can add menus to that menu bar using the Menu Editor. Menus are pull-down lists of options that provide quick access to the application’s options. Go back to Qt Designer and your newly created main window. At the top of the form, you’ll see a menu bar with the placeholder text Type Here.
+
+If you double-click or press Enter on this placeholder text, then you can type the name of your first menu. To confirm the menu name, just press Enter.
+
+Say you want to create your own text editor. Typically, this kind of application has a File menu with at least some of the following options:
+
+New for creating a new document
+Open for opening an existing document
+Open Recent for opening recently viewed documents
+Save for saving a document
+Exit for exiting the application
+Here’s how you can use Qt Designer to create this menu:
+
+Qt Designer Main Menu Editor
+Qt Designer’s Menu Editor allows you to add menus to the menu bar in a user-friendly way. When you enter the name of a menu or menu option, you can use an ampersand symbol (&) before a given letter to provide a keyboard accelerator.
+
+For example, if you add an ampersand before the F in the File menu, then you can access this menu by pressing Alt+F. Likewise, if you add an ampersand before the N in New, then once you’ve launched the File menu, you can access the New option by pressing N.
+
+With the Menu Editor, you can also add separators to your menus. This is a good way to visually separate menu options and group them logically. To add a separator, double-click the Add Separator option at the end of the active menu in the Menu Editor. You can remove an existing separator by right-clicking it and then selecting Remove Separator in the context menu. This menu also allows you to add new separators.
+
+If you need to move a separator to another place in a given menu, then you can drag the separator to the desired position and drop it there. A red line will indicate the position where the separator will be placed.
+
+You can also add a submenu to a given menu option. To do this, click the icon on the right side of the menu option to which you want to attach the submenu, just like you did with the Open Recent option in the above example.
+
+To run a preview of your form, go to Form → Preview, or hit the key combination Ctrl+R on your keyboard.
+
+When you create a menu like the File menu in your sample text editor, a new QMenu object is automatically added to your menu bar. When you add a menu option to a given menu, you create an action. Qt Designer provides an Action Editor for creating, customizing, and managing actions. The tool provides a few handy options that you can use to fine-tune your actions:
+
+
+With the Action Editor, you can fine-tune, update, or set the following options:
+
+The text of the action, which will be shown on menu options and toolbar buttons
+The object name, which you’ll use in your code to reference the action object
+The icons that will be shown on your menu options and toolbar buttons
+The checkable property of the action
+The keyboard shortcuts, which will provide the user with a quick way to access the action
+The final ellipsis (...) in the text of your menu options is a widely used convention for naming options that don’t perform an immediate action but launch a pop-up dialog for performing further actions.
+
+In the case of the icons, you need to pack those icons with your application as independent files, or you can create a resources file, also known as a .qrc file. For this example, you can download the required icons and other resources by clicking the link below:
+
+Once you’ve downloaded the icons, create a resources directory besid your main_window.ui file and copy the icons there. Then get back to the Action Editor and add icons to your actions like this:
+
+
+Note that your menu options now display an icon on the left margin. This provides extra visual information to your users and helps them find the desired option. Now go ahead and add an Edit menu with the following options:
+
+Copy for copying some text
+Paste for pasting some text
+Cut for cutting some text
+Find and Replace for finding and replacing text
+Next, add a Help menu with an About option for launching a dialog with general information about your text editor. Finally, go to the Property Editor and set the title of your window to Sample Editor. After these additions, your main window should look something like this:
+
+Sample Text Editor Main Menu
+With these additions, your sample text editor’s main menu is starting to look like the menu of a real text editor!
+
+Creating a Toolbar
+You can add as many toolbars as you need to your main window’s GUI using Qt Designer. To do that, right-click on the form and select Add Tool Bar from the context menu. This adds an empty toolbar at the top of the window. Alternatively, you can predefine the toolbar area where you want to place a given toolbar by selecting Add Tool Bar to Other Area:
+
+Qt Designer Create Toolbars
+Once you have your toolbars in place, you can populate them with buttons. To do this, you use actions rather than specific toolbar buttons from the Widget Box. To add actions to your toolbars, you can use the Action Editor:
+
+
+Actions can 
+
+Laying Out a Single Central Widget
+Qt Designer uses QMainWindow for building its Main Window template. This class provides a default layout that allows you to create a menu bar, one or more toolbars, one or more dock widgets, a status bar, and a central widget. By default, Qt Designer uses a QWidget object as the central widget on the Main Window template.
+
+Using a bare-bones QWidget object as the central widget on a main window’s GUI is a good choice because, on top of that widget, you can place either a single widget or multiple widgets in a coherent layout.
+
+For example, in your sample text editor, you might want to use a single widget that provides your users with a work area to type, copy, paste, and edit their text. For this purpose, you can use a QTextEdit object and then add a vertical (or horizontal) layout as the central widget’s layout:
+
+
+In this example, you first drag a QTextEdit onto the form. Then you click on the form to select your central widget. Finally, you apply a vertical layout to your central widget by clicking Lay Out Vertically on Qt Designer’s toolbar.
+
+Since the spacing around the QTextEdit doesn’t look right, you use the Object Inspector to change the margins of the layout from 9 pixels to 1 pixel.
+
+With Qt Designer, you can use different layout managers to arrange your widgets quickly. Arguably, the most accessible way of laying out your GUIs with Qt Designer is using the layout-related section on the main toolbar:
+
+Qt Designer Layout Toolbar
+From left to right, you’ll find the following options to create different types of layouts:
+
+Option	Widget Arrangement	Layout Class	Keyboard Shortcut
+Lay Out Horizontally	Horizontally in one row and several columns	QHBoxLayout	Ctrl+1
+Lay Out Vertically	Vertically in one column and several rows	QVBoxLayout	Ctrl+2
+Lay Out Horizontally in Splitter	Horizontally in a resizable splitter	QSplitter	Ctrl+3
+Lay Out Vertically in Splitter	Vertically in a resizable splitter	QSplitter	Ctrl+4
+Lay Out in a Grid	Tabularly in a grid with several rows and columns	QGridLayout	Ctrl+5
+Lay Out in a Form Layout	Tabularly in a two-column table	QFormLayout	Ctrl+6
+The last two options in the toolbar are related to layouts but don’t create them:
+
+Break Layout allows you to break an existing layout. Once widgets are arranged in a layout, you can’t move or resize them individually because their geometry is controlled by the layout. To modify individual widgets, you might need to break the layout and redo it later. To access this option, you can press Ctrl+0 on your keyboard.
+
+Adjust Size adjusts the size of the layout to accommodate contained widgets and to ensure that each has enough space to be visible. To access this option, you can press Ctrl+J on your keyboard.
+
+You can also access all these layout-related options through Qt Designer’s main menu bar, under the Form menu:
+
+Qt Designer Form Menu
+In the Form menu, you have access to all the layout-related options, with a complete reference of the keyboard shortcuts to access them. You can also access these options through the form’s context menu, under the Lay Out option.
+
+be shared between menu options and toolbar buttons, so in this case, you reuse the actions that you created when you populated your menus in the preceding section. To populate the toolbar, click on an action on the Action Editor, then drag and drop it onto the toolbar. Note that by right-clicking on the toolbar, you can add separators to visually separate the tool buttons.
